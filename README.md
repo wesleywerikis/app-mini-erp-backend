@@ -97,4 +97,4 @@ app-mini-erp-backend/
 ## ✨ Autor
 
 Desenvolvido por **Wesley Werikis** – estudando e aplicando Java, SQL e boas práticas de desenvolvimento backend.  
-[LinkedIn](https://www.linkedin.com/in/wesleywerikis) | [GitHub](hhttps://github.com/wesleywerikis)
+[LinkedIn](https://www.linkedin.com/in/wesleywerikis) | [GitHub](https://github.com/wesleywerikis)
