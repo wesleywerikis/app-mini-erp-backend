@@ -12,14 +12,19 @@ import br.com.minierp.infra.Database;
 public class ClienteDao {
 
     public List<Cliente> listar(String q) throws Exception {
-        String sql = "SELECT id, nome, documento, email FROM clientes"
-        + (q != null && !q.isBlank() ? "WHERE nome ILIKE ? " : "")
-        + "ORDER BY id DESC LIMIT 100";
+        String base = "SELECT id, nome, documento, email FROM clientes";
+        String where = (q != null && !q.isBlank()) ? " WHERE nome ILIKE ? " : " ";
+        String order = " ORDER BY id DESC LIMIT 100";
+        String sql = base + where + order;
 
         try (Connection c = Database.getConnection();
         PreparedStatement ps = c.prepareStatement(sql)) {
-            if (q != null && !q.isBlank() ps.setString(1, "%" + q + "%");
-            try(ResultSet rs = ps.executeQuery()) {
+            
+            if(q != null && !q.isBlank()){
+                ps.setString(1, "%" + q + "%");
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
                 List<Cliente> out = new ArrayList<>();
                 while (rs.next()) {
                     out.add(new Cliente(
@@ -28,8 +33,8 @@ public class ClienteDao {
                         rs.getString("documento"),
                         rs.getString("email")
                     ));
-                }
-                return out;
+             }
+             return out;
             }
         }
     }
@@ -43,7 +48,7 @@ public class ClienteDao {
             ps.setString(3, cli.email());
             try (ResultSet rs = ps.executeQuery()) {
                 rs.next();
-                return rs.getInt("id");
+                return rs.getInt(1);
             }
         }
     }
